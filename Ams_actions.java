@@ -184,7 +184,7 @@ public class Ams_actions extends TestBase{
   
   public String get_AssetType_valmsg()
   {
-	 WebDriverWait wait = new WebDriverWait(driver,  Duration.ofSeconds(10));
+	 WebDriverWait wait = new WebDriverWait(driver,  Duration.ofSeconds(15));
 	 wait.until(ExpectedConditions.elementToBeClickable(Add_Asset_type_Val_msg));
 	 return Add_Asset_type_Val_msg.getText();
   }
@@ -420,7 +420,7 @@ public class Ams_actions extends TestBase{
 	public int Search_asset_frm_list(String asset_name) throws InterruptedException {
 		int j=1;
 		int recordcount = Asset_page_count();//Integer.parseInt(Assets_pg_count.getText());
-//		System.out.println("Reccc "+ recordcount);
+		System.out.println("Pg _count "+ recordcount);
 		List<String> allHeaderNames = new ArrayList<String>();
 		
 		for (int k=2; k<=recordcount; k++) {
@@ -434,13 +434,14 @@ public class Ams_actions extends TestBase{
 			
 			//for (WebElement header : list_assets) 
 			{
+				System.out.println("inde of j-row "+j);
 				String Asset_Name = List_assets.get(j).findElements(By.xpath("//a[@data-test-id='202203290949270601791']")).get(j-1).getText();
-				//System.out.println("Asset Name "+Asset_Name);
+				System.out.println("Asset Name "+Asset_Name);
 				
 				if (Asset_Name.equalsIgnoreCase(asset_name))
 				{	
 					asset_found=true;
-					index_ele=j-1;
+					index_ele=j;
 					//System.out.println("Asset-Found = "+asset_found);
 					break;
 				}
@@ -451,7 +452,7 @@ public class Ams_actions extends TestBase{
 			}
 			Asset_Nxt_btn.click();
 		}
-		return j;
+		return index_ele;
 	}	
 
 	public String Return_Rand_string()
